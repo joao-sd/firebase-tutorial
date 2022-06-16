@@ -2,7 +2,7 @@ import { collection, DocumentData, getDocs } from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../constants/firebase.constants";
 
-export const useData = (collectionPath: string) => {
+export function useData<T>(collectionPath: string): T[] | undefined {
   const [data, setData] = useState<DocumentData>();
 
   const collectionRef = collection(db, collectionPath);
@@ -12,7 +12,11 @@ export const useData = (collectionPath: string) => {
       try {
         const response = await getDocs(collectionRef);
 
-        setData(response.docs.map((doc) => doc.data()));
+        setData(
+          response.docs.map((doc) => {
+            return { ...doc.data(), id: doc.id };
+          })
+        );
       } catch (error) {
         console.error(error);
       }
@@ -20,5 +24,5 @@ export const useData = (collectionPath: string) => {
     fetchUsers();
   }, []);
 
-  return data;
-};
+  return data as T[];
+}

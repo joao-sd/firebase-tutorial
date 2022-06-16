@@ -1,15 +1,24 @@
-import { useEffect } from "react";
 import { useData } from "./hooks/useData";
+import { IUser } from "./types/user.types";
 
 function App() {
-  const users = useData("users");
+  const users = useData<IUser>("users");
 
-  useEffect(() => {
-    console.log(process.env.REACT_APP_ENV);
-    console.log(users);
-  }, [users]);
+  const onRenderUsers = () =>
+    users?.map((user) => (
+      <ul>
+        <li>{user.id}</li>
+        <li>{user.name}</li>
+        <li>{user.age}</li>
+      </ul>
+    ));
 
-  return <h1>Hi firebase</h1>;
+  return (
+    <>
+      <h1>Users</h1>
+      {onRenderUsers()}
+    </>
+  );
 }
 
 export default App;
