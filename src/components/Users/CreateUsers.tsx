@@ -1,7 +1,7 @@
 import React, { FormEvent } from "react";
 import styled from "styled-components";
+import { useCreateData } from "../../hooks/useCreateData";
 import { useForm } from "../../hooks/useForm";
-import { useSetData } from "../../hooks/useSetData";
 import { INewUser } from "../../types/user.types";
 
 interface IProps {
@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export const CreateUsers: React.FC<IProps> = ({ onCreate }) => {
-  const setUsers = useSetData("users");
+  const setUsers = useCreateData("users");
 
   const [newUser, setNewUser] = useForm<INewUser>({
     name: "",

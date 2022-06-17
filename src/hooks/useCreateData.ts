@@ -1,12 +1,12 @@
 import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../constants/firebase.constants";
 
-export function useSetData<T>(
+export function useCreateData<T extends Object>(
   collectionPath: string
-): (payload: Object) => Promise<void> {
+): (payload: T) => Promise<void> {
   const collectionRef = collection(db, collectionPath);
 
-  const set = async (payload: Object) => {
+  const set = async (payload: T) => {
     try {
       await addDoc(collectionRef, payload);
     } catch (error) {
