@@ -1,7 +1,7 @@
-import { UsersCRUD } from "./components/UsersCRUD";
+import { ReadUsers } from "./components/Users/ReadUsers";
 
 function App() {
-  return <UsersCRUD />;
+  return <ReadUsers />;
 }
 
 export default App;
