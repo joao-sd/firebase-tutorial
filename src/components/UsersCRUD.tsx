@@ -12,7 +12,7 @@ export const UsersCRUD: React.FC = () => {
 
   const onRenderUsers = () =>
     users?.map((user) => (
-      <ul>
+      <ul key={user.name}>
         <li>{user.id}</li>
         <li>{user.name}</li>
         <li>{user.age}</li>
