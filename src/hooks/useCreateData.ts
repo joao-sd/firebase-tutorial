@@ -6,7 +6,7 @@ export function useCreateData<T extends Object>(
 ): (payload: T) => Promise<void> {
   const collectionRef = collection(db, collectionPath);
 
-  const set = async (payload: T) => {
+  const create = async (payload: T) => {
     try {
       await addDoc(collectionRef, payload);
     } catch (error) {
@@ -14,5 +14,5 @@ export function useCreateData<T extends Object>(
     }
   };
 
-  return set;
+  return create;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useGetData } from "../../hooks/useGetData";
 import { useUpdateData } from "../../hooks/useUpdateData";
 import { IUser } from "../../types/user.types";
@@ -10,16 +10,16 @@ export const ReadUsers: React.FC = () => {
   const getUsers = useGetData<IUser>("users");
   const updateUsers = useUpdateData("users");
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     const users = await getUsers();
     if (users) {
       setUsers(users);
     }
-  };
+  }, [getUsers]);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
 
   const onUpdateUser = async (id: string) => {
     const updatedUser = {
